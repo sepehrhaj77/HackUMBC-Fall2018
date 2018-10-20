@@ -1,5 +1,4 @@
 class Enemy:
-
     #Constructor - sets the hp of the snake to the passed parameter
     def __init__(self, health):
         self.hp = health

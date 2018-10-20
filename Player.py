@@ -1,5 +1,4 @@
 MAX_PLAYER_HP = 5
-
 class Player:
     #Constructor - sets the hp of the player to the passed parameter
     def __init__(self, health):
