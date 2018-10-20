@@ -9,6 +9,6 @@ def level1():
 def main():
     print("Welcome to Slay the Python. bitch")
     level1()
-    print("level 1 complete")
+    print("level 1 complete!")
 
 main()
