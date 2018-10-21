@@ -1,13 +1,14 @@
 
 import pygame, math, random, time
 from pygame.locals import *
-#from inputBox import InputBox
+from printer import Textprint
 
 pygame.init()
 
 COLOR_INACTIVE = pygame.Color('lightskyblue3')
 COLOR_ACTIVE = pygame.Color('dodgerblue2')
 COLOR_SKY = pygame.Color('aquamarine1')
+COLOR_WHITE = (255, 255, 255)
 FONT = pygame.font.Font(None, 32)
 
 class InputBox:
@@ -19,6 +20,7 @@ class InputBox:
         self.txt_surface = FONT.render(text, True, self.color)
 
 
+
     def handle_event(self, event):
         temp = ''
         if event.type == pygame.KEYDOWN:
@@ -27,39 +29,25 @@ class InputBox:
                 print(self.text)
                 temp = self.text
                 self.text = ''
-                window.fill(COLOR_SKY)
-
 
             elif event.key == pygame.K_BACKSPACE:
                 self.text = self.text[:-1]
-                window.fill(COLOR_SKY)
-
+       
             elif self.txt_surface.get_width() < 590:
                 self.text += event.unicode
                 # Re-render the text.
             self.txt_surface = FONT.render(self.text, True, self.color)
+            #pygame.display.update()
         if temp != '':
             return temp
 
     def update(self):
         # Resize the box if the text is too long.
-        
         self.rect.w = 600
 
     def draw(self, screen):
         # Blit the text.
-        screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
-        # Blit the rect.
-        pygame.draw.rect(screen, self.color, self.rect, 2)
-class textBox:
-    def __init__(self, x, y, w, h, FONT,  text=''):
-        self.rect = pygame.Rect(x, y, w, h)
-        self.color = COLOR_INACTIVE
-        self.text = text
-        self.txt_surface = FONT.render(text, True, self.color)
 
-    def draw(self, screen):
-        # Blit the text.
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
         # Blit the rect.
         pygame.draw.rect(screen, self.color, self.rect, 2)
@@ -78,20 +66,12 @@ wh = 600
 
 def StartGame(window):
 
-    printManual(window)
     level1(window)
     level2(window)
     final(window)
 
     return victory(window)
 
-def restart(window):
-
-    level1(window)
-    level2(window)
-    final(window)
-
-    return victory(window)
 
 
 def startPage(window):
@@ -162,12 +142,12 @@ def level1(window):
     FONT = pygame.font.Font(None, 32)
 
     #text message goes here
-    textMessage = ""
+    textMessage = "Stage 1"
 
 
     backGround = pygame.image.load("background.png")
     input_box = InputBox(100, 500, 600, 34 , FONT)
-    text_box = textBox(100, 400, 600, 100, FONT, textMessage)
+    textBox = Textprint(textMessage)
     window.fill((COLOR_SKY))
     
     while x2 == 1:
@@ -177,9 +157,9 @@ def level1(window):
                     x2 = 0
 
             input_box.handle_event(event)
-
+        textBox.blit_text(window, (100,400))
      
-        input_box.update()
+        #input_box.update()
         #window.fill((30, 30, 30))
         input_box.draw(window)
 
@@ -199,7 +179,7 @@ def level2(window):
 
     backGround = pygame.image.load("background.png")
     input_box = InputBox(100, 500, 600, 34 , FONT)
-    window.fill((30, 30, 30))
+    window.fill(COLOR_SKY)
     
     while x2 == 1:
         for event in pygame.event.get():
@@ -229,7 +209,7 @@ def final(window):
 
     backGround = pygame.image.load("background.png")
     input_box = InputBox(100, 500, 600, 34 , FONT)
-    window.fill((30, 30, 30))
+    window.fill(COLOR_SKY)
     
     while x2 == 1:
         for event in pygame.event.get():
@@ -253,30 +233,7 @@ def final(window):
  
         pygame.display.update()
 
-def printManual(window):
-    bg = (255, 255, 255)
-    processed = 0
-    while processed == 0:
-        #print the menu
-        
-        for event in pygame.event.get():
-            if event.type == KEYDOWN:
-                if event.key == K_SPACE:
-                    processed = 1
 
-
-
-        window.fill((255, 175, 0))
-        text_title = pygame.font.SysFont(None, 125)
-
-        title = text_title.render("Manual", True, black)
-        window.blit(title, (50, 50))
-
-        """
-        print the manual here
-
-        """
-        pygame.display.update()
 
 
 
@@ -304,7 +261,7 @@ game = 1
 Playagain = startPage(window)
 
 while Playagain != 0:
-    Playagain = restart(window)
+    Playagain = startPage(window)
     
 pygame.quit()
 
