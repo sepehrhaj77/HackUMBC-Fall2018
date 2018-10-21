@@ -33,7 +33,7 @@ def level1(player):
         success2 = False
         while (not(player.isDead()) and not(success2)):
             #Give player quick tutorial on how the print statement works. Then, get their input
-            gameMessage = "Have fun! Try printing anything you want. Do it correctly and you will slay the python!\n"
+            gameMessage = "Now you can set your own battlecry! Try printing any statement you want. Do it correctly and you will slay the python!\n"
             usrInput = input(gameMessage)
 
             #Compare the player's answer to the correct answer:
@@ -73,7 +73,7 @@ def level2(player):
     while (not(player.isDead()) and not(success1)):
 
         #Give player quick tutorial on how the print statement works. Then, get their input
-        gameMessage = ("Oh no! Your knight lost his sword so his attack value is 0! Use variables to set your attack to 1!\nVariables are how python allows the programmer to save values and reuse them. For example, this is how you set the variable \"x\" to 10: x=10\nIn this case, we have the knight's attack value stored in the variable name \"attack\". Set it to 1:\n")
+        gameMessage = ("Oh no! Your knight's sword has dulled so his attack value is 0! Use variables to set your attack to 1!\nVariables are how python allows the programmer to save values and reuse them. For example, this is how you set the variable \"x\" to 10: x=10\nIn this case, we have the knight's attack value stored in the variable name \"attack\". Set it to 1:\n")
         usrInput = input(gameMessage)
 
         #Compare the player's answer to the correct answer:
@@ -94,7 +94,7 @@ def level2(player):
         success2 = False
         while (not(player.isDead()) and not(success2)):
             #Game message for second part of level 2
-            gameMessage = "Cool! Now lets save your knight's battlecry to the variable \"phrase\"\n"
+            gameMessage = "Cool! Now lets save your knight's battlecry to the variable \"phrase\". To save text to a variable, simply put your desired text in quotation marks.\n"
             usrInput = input(gameMessage)
             usrInput = usrInput.strip()
             #Compare the player's answer to the correct answer:
@@ -178,7 +178,7 @@ def level2(player):
         success5 = False
         while(not(player.isDead()) and not(success5)):
             #Game message for second part of level 2
-            gameMessage = "If statements are used to block off lines of code unless a certain specification is met.\nFor example: if(bool == True): would run the code in the if statement. We want to attack only IF our enemy is purple. So put our boolean from before (enemyIsBad) into an if statement to see if we will attack pythonos."
+            gameMessage = "If statements are used to block off lines of code unless a certain specification is met.\nFor example: if(bool == True): would run the code in the if statement. We want to attack only IF our enemy is purple. So put our boolean from before (enemyIsBad) into an if statement to see if we will attack Pythonos."
             usrInput = input(gameMessage)
             usrInput = usrInput.strip()
             usrInput = usrInput.replace(" ", "")

@@ -1,0 +1,42 @@
+Stage 1 info 1 - 
+Printing is how you display messages on the command line! Do this by typing: print(\"<your message>\") Here is an example: print(\"Hello World!\")
+
+Stage 1 prompt 1 -
+Use this to attack the python! Try printing the message \"The knight attacks the python\" (case-sensitive)
+
+
+Stage 1 prompt 2 - 
+Now you can set your own battlecry! Try printing any statement you want. Do it correctly and you will slay the python!
+
+Stage 1 victory text -
+Level 1 complete! The python has been slain.
+
+Stage 2 info 1 -
+Oh no! Your knight's sword has dulled so his attack value is 0! Use variables to set your attack to 1! Variables are how python allows the programmer to save values and reuse them. For example, this is how you set the variable \"x\" to 10: x=10. 
+
+Stage 2 prompt 1 -
+In this case, we have the knight's attack value stored in the variable name \"attack\". Set it to 1:
+
+Stage 2 prompt 2 -
+Cool! Now lets save your knight's battlecry to the variable \"phrase\". To save text to a variable, simply put your desired text in quotation marks instead of a number like in the previous phrase.
+
+Stage 2 info 2 - 
+Awesome! You can also print variables by putting it in the print statement. For example, to print the variable \"x\" you would type: print(x)
+
+Stage 2 prompt 3 - 
+Now, print out your knight's phrase.
+
+Stage 2 info 3 -
+Booleans are variables that can only be either True or False. Note! \"=\" sets a variable to a value. If you want to make a boolean you should use \"==\". For example, myBool = 3+4 = 5 would not do anything. However, myBool = 3+4 == 5 would return a \"False\".
+
+Stage 2 prompt 4 - 
+The color purple is the mark of our enemies. Set the variable \"enemyIsBad\" to be True if \"enemyColor\" is \"purple\"
+
+Stage 2 info 4 - 
+If statements are used to block off lines of code unless a certain specification is met. For example: if(bool == True): would run the code in the if statement. 
+
+Stage 2 prompt 5 -
+We want to attack only IF our enemy is purple. So put our boolean from before (enemyIsBad) into an if statement to see if we will attack Pythonos.
+
+Stage 2 victory text -
+Level 2 complete! Pythonos has been slain.
