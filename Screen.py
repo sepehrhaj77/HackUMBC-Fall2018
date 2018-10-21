@@ -58,8 +58,6 @@ class InputBox:
         pygame.draw.rect(screen, (0,0,0), self.rect, 2)
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5)) 
 
-
-
 class Screen:
 
     knight  = pygame.image.load("knight.png")
@@ -71,6 +69,7 @@ class Screen:
     game_over = pygame.image.load("game_over.png")
     heart = pygame.image.load("heart.png")
     backGround = pygame.image.load("background.png")
+    enemyHeart = pygame.image.load("enemy_heart.png")
     
     QUIT = 0
     START = 1
@@ -85,16 +84,16 @@ class Screen:
             for event in pygame.event.get():
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
-                        return QUIT
+                        return Screen.QUIT
 
                     if event.key == K_SPACE:
-                        return START
+                        return Screen.START
 
             self.window.fill((255, 175, 0))
             text_subt  = pygame.font.SysFont(None, 75)
             text_subt2 = pygame.font.SysFont(None, 25)
         
-            self.window.blit(title_screen, (0, 0))
+            self.window.blit(Screen.title_screen, (0, 0))
             subt1 = text_subt.render("Press 'Space' to start.", True, black, (255, 250, 0))
             subt2 = text_subt.render("Press 'Esc' to exit game.", True, black, (255, 100, 0))
         
@@ -118,7 +117,7 @@ class Screen:
             self.window.fill((255, 175, 0))
             text_subt  = pygame.font.SysFont(None, 75)
         
-            self.window.blit(win_screen, (0, 0))
+            self.window.blit(Screen.win_screen, (0, 0))
             subt1 = text_subt.render("Press 'Space' to restart.", True, black, (255, 250, 0))
             subt2 = text_subt.render("Press 'Esc' to exit game.", True, black, (255, 100, 0))
         
@@ -142,7 +141,7 @@ class Screen:
             self.window.fill((255, 175, 0))
             text_subt  = pygame.font.SysFont(None, 75)
         
-            self.window.blit(game_over, (0, 0))
+            self.window.blit(Screen.game_over, (0, 0))
             subt1 = text_subt.render("Press 'Space' to restart.", True, black, (255, 250, 0))
             subt2 = text_subt.render("Press 'Esc' to exit game.", True, black, (255, 100, 0))
         
@@ -176,27 +175,27 @@ class Screen:
                     textBox.changeText("You did something")
 
             #visual effects  
-            heartwidth = playerHeart.get_width() + 5
-            for i in range(heartNum):
+            heartwidth = Screen.heart.get_width() + 5
+            for i in range(playerHearts):
                 width = 25 + heartwidth * i
-                window.blit(heart, (width, 50))
+                window.blit(Screen.heart, (width, 50))
 
-            heartwidth = enemyHearts.get_width() + 5
-            for i in range(heartNum):
+            heartwidth = Screen.enemyHeart.get_width() + 5
+            for i in range(enemyHearts):
                 width = 700 - heartwidth * i
-                window.blit(enemyHeart, (width, 50))
+                window.blit(Screen.enemyHeart, (width, 50))
 
             textBox.blit_text(window)     
             input_box.draw(window)
             pygame.display.flip()
-            window.blit(backGround, (0,50))
+            window.blit(mybackGround, (0,50))
             window.blit(playerSprite, (150, 120))
             window.blit(enemySprite, (450, 200))
             
 
 
 
-
+"""
 
     def animateLeft():
 
@@ -205,7 +204,7 @@ class Screen:
     def displayTutorialText(text):
 
     def displayBattleText(text):
-
+"""
 #returns the window
 def InitGraphics():
     window = pygame.display.set_mode((ww, wh), FULLSCREEN)
@@ -217,5 +216,18 @@ def InitGraphics():
 
     return window
 
-def quitGame():
-    pygame.quit()
+window = pygame.display.set_mode((ww, wh), FULLSCREEN)
+
+myScreeen = Screen(window)
+game = 1
+while game:
+
+    game = myScreeen.startScreen()
+    stage = 1
+    if game:
+        myScreeen.battleScreen(myScreeen.knight, myScreeen.First, 5,5,"This is stage one")
+
+
+pygame.quit()
+
+
