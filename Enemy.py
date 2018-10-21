@@ -11,7 +11,6 @@ class Enemy:
     def loseHP(self):
         self.hp -= 1
         print("A mighty blow! The snake loses a heart.")    
-
     
     #Returns if the snake is dead. True->Dead; False->Alive
     def isDead(self):
