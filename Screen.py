@@ -150,10 +150,12 @@ class Screen:
      
             pygame.display.update()
     
-    def battleScreen(self, playerSprite, enemySprite, playerHearts, enemyHearts, text):
+    def battleScreen(self, playerSprite, enemySprite, playerHeartss, enemyHeartss, text, isFinalBoss):
 
         game = 1
-
+        userTurn = True
+        playerHearts = playerHeartss
+        enemyHearts = enemyHeartss
         #text message goes here
         textMessage = text
 
@@ -161,36 +163,55 @@ class Screen:
         input_box = InputBox()
         textBox = Textprint(textMessage)
         window.fill((COLOR_SKY))
-        
+        if isFinalBoss:
+            pos = (425, 60)
+            stageMessage = [] #here is the input message box
+        else:
+            pos = (450, 200)
+            stageMessage = []
+
         while game == 1:
-     
+            Input = ""
             for event in pygame.event.get():
                 if event.type == KEYDOWN:
+                    #this is for testing
                     if event.key == K_ESCAPE:
                         game = 0
+                        return 1
+                    #####################
 
                 Input = input_box.handle_event(event)
-                if(Input):
 
-                    textBox.changeText("You did something")
+                ########################################
+                #here is the action
+            if(Input == "print(\"The knight attacks the python\")"):
+                    #matches the requirement
+                #textBox.changeText("You did something, Press enter to continue")
+                enemyHearts -= 1
+                return 1, playerHeartss, enemyHeartss
+            elif Input != "":
+                #if the player did not enter the right message
+                playerHearts -= 1
+                return 1, playerHeartss, enemyHeartss
+                ##########################################
 
             #visual effects  
             heartwidth = Screen.heart.get_width() + 5
             for i in range(playerHearts):
                 width = 25 + heartwidth * i
-                window.blit(Screen.heart, (width, 50))
+                window.blit(Screen.heart, (width, 25))
 
             heartwidth = Screen.enemyHeart.get_width() + 5
             for i in range(enemyHearts):
                 width = 700 - heartwidth * i
-                window.blit(Screen.enemyHeart, (width, 50))
+                window.blit(Screen.enemyHeart, (width, 25))
 
             textBox.blit_text(window)     
             input_box.draw(window)
             pygame.display.flip()
             window.blit(mybackGround, (0,50))
             window.blit(playerSprite, (150, 120))
-            window.blit(enemySprite, (450, 200))
+            window.blit(enemySprite, pos)
             
 
 
@@ -217,7 +238,9 @@ def InitGraphics():
     return window
 
 window = pygame.display.set_mode((ww, wh), FULLSCREEN)
-
+Stage1texts = ["Printing is how you display messages on the command line! Do this by typing: print(\"<your message>\") Here is an example: print(\"Hello World!\").Use this to attack the python! Try printing the message \"The knight attacks the python\" (case-sensitive)", "Good job! Now you can set your own battlecry! Try printing any statement you want. Do it correctly and you will slay the python!", "Level 1 complete! The python has been slain."]
+Stage2texts = ["Oh no! Your knight's sword has dulled so his attack value is 0! Use variables to set your attack to 1! Variables are how python allows the programmer to save values and reuse them. For example, this is how you set the variable \"x\" to 10: x=10.", "In this case, we have the knight's attack value stored in the variable name \"attack\". Set it to 1:", "Cool! Now lets save your knight's battlecry to the variable \"phrase\". To save text to a variable, simply put your desired text in quotation marks instead of a number like in the previous phrase.", "Awesome! You can also print variables by putting it in the print statement. For example, to print the variable \"x\" you would type: print(x)", "Now, print out your knight's phrase.", "Booleans are variables that can only be either True or False. Note! \"=\" sets a variable to a value. If you want to make a boolean you should use \"==\". For example, myBool = 3+4 = 5 would not do anything. However, myBool = 3+4 == 5 would return a \"False\".", "The color purple is the mark of our enemies. Set the variable \"enemyIsBad\" to be True if \"enemyColor\" is \"purple\"", "If statements are used to block off lines of code unless a certain specification is met. For example: if(bool == True): would run the code in the if statement. "\
+                , "We want to attack only IF our enemy is purple. So put our boolean from before (enemyIsBad) into an if statement to see if we will attack Pythonos.", "Level 2 complete! Pythonos has been slain."]
 myScreeen = Screen(window)
 game = 1
 while game:
@@ -225,8 +248,22 @@ while game:
     game = myScreeen.startScreen()
     stage = 1
     if game:
-        myScreeen.battleScreen(myScreeen.knight, myScreeen.First, 5,5,"This is stage one")
 
+        heroHeart = 5
+        enemyHeart = 5
+        while stage == 1:
+            status, heroHeart, enemyHeart = myScreeen.battleScreen(myScreeen.knight, myScreeen.First, heroHeart,enemyHeart,Stage1texts[0], 0)
+            if status == 1:
+                status, heroHeart, enemyHeart = myScreeen.battleScreen(myScreeen.knight, myScreeen.First, heroHeart,enemyHeart,Stage1texts[1], 0)
+            elif status == 2:
+                status, heroHeart, enemyHeart = myScreeen.battleScreen(myScreeen.knight, myScreeen.First, heroHeart,enemyHeart,"Sorry, try again", 0)
+            elif status == 3:
+                status, heroHeart, enemyHeart = myScreeen.battleScreen(myScreeen.knight, myScreeen.First, heroHeart,enemyHeart,Stage1texts[2], 0)
+            elif status == 4:
+                status, heroHeart, enemyHeart = myScreeen.battleScreen(myScreeen.knight, myScreeen.First, heroHeart,enemyHeart,"Sorry you lost", 0)      
+        status = myScreeen.battleScreen(myScreeen.knight, myScreeen.Final, heroHeart,enemyHeart, "This is the final Boss", 1)
+    
+        game = myScreeen.lossScreen()
 
 pygame.quit()
 
