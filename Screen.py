@@ -175,8 +175,17 @@ class Screen:
 
                     textBox.changeText("You did something")
 
-
             #visual effects  
+            heartwidth = playerHeart.get_width() + 5
+            for i in range(heartNum):
+                width = 25 + heartwidth * i
+                window.blit(heart, (width, 50))
+
+            heartwidth = enemyHearts.get_width() + 5
+            for i in range(heartNum):
+                width = 700 - heartwidth * i
+                window.blit(enemyHeart, (width, 50))
+
             textBox.blit_text(window)     
             input_box.draw(window)
             pygame.display.flip()
