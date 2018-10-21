@@ -167,7 +167,7 @@ def level1(window):
 
     backGround = pygame.image.load("background.png")
     input_box = InputBox(100, 500, 600, 34 , FONT)
-    #text_box = text_box(100, 400, 600, 100, FONT, textMessage)
+    text_box = textBox(100, 400, 600, 100, FONT, textMessage)
     window.fill((COLOR_SKY))
     
     while x2 == 1:
@@ -185,12 +185,12 @@ def level1(window):
 
         pygame.display.flip()
 
-        window.blit(backGround, (50,50))
+        window.blit(backGround, (0,50))
 
         window.blit(knight, (150, 120))
         window.blit(First, (450, 200))
  
-        pygame.display.update()
+        pygame.display.update()  
 
 
 def level2(window):
@@ -216,7 +216,7 @@ def level2(window):
 
         pygame.display.flip()
 
-        window.blit(backGround, (50,50))
+        window.blit(backGround, (0,50))
 
         window.blit(knight, (150, 120))
         window.blit(Second, (450, 200))
@@ -246,7 +246,7 @@ def final(window):
 
         pygame.display.flip()
 
-        window.blit(backGround, (50,50))
+        window.blit(backGround, (0,50))
 
         window.blit(knight, (150, 120))
         window.blit(Final, (450, 50))
