@@ -13,11 +13,11 @@ FONT = pygame.font.Font(None, 32)
 
 class InputBox:
 
-    def __init__(self, x, y, w, h, FONT,  text=''):
+    def __init__(self,FONT= pygame.font.Font(None, 32),  text='',x=100, y=550, w=600, h=34):
         self.rect = pygame.Rect(x, y, w, h)
-        self.color = COLOR_INACTIVE
+        self.color = (0,0,0)
         self.text = text
-        self.txt_surface = FONT.render(text, True, self.color)
+        self.txt_surface = FONT.render(text, True, (0,0,0))
 
 
 
@@ -33,7 +33,7 @@ class InputBox:
             elif event.key == pygame.K_BACKSPACE:
                 self.text = self.text[:-1]
        
-            elif self.txt_surface.get_width() < 590:
+            elif self.txt_surface.get_width() < 580:
                 self.text += event.unicode
                 # Re-render the text.
             self.txt_surface = FONT.render(self.text, True, self.color)
@@ -48,10 +48,11 @@ class InputBox:
     def draw(self, screen):
         # Blit the text.
 
-        screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
+        
         # Blit the rect.
-        pygame.draw.rect(screen, self.color, self.rect, 2)
-
+        pygame.draw.rect(screen, (255,255,255), self.rect, 0)
+        pygame.draw.rect(screen, (0,0,0), self.rect, 2)
+        screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5)) 
 
 
 bg = (20, 20, 50)
@@ -139,38 +140,38 @@ def victory(window):
 
 def level1(window):
     x2 = 1
-    FONT = pygame.font.Font(None, 32)
+    
 
     #text message goes here
     textMessage = "Stage 1"
 
 
     backGround = pygame.image.load("background.png")
-    input_box = InputBox(100, 500, 600, 34 , FONT)
+    input_box = InputBox()
     textBox = Textprint(textMessage)
     window.fill((COLOR_SKY))
     
     while x2 == 1:
+        clock.tick(30)
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     x2 = 0
 
-            input_box.handle_event(event)
-        textBox.blit_text(window, (100,400))
-     
-        #input_box.update()
-        #window.fill((30, 30, 30))
+            Input = input_box.handle_event(event)
+            if(Input):
+                textBox.changeText("You did something")
+
+
+        #visual effects  
+        textBox.blit_text(window)     
         input_box.draw(window)
-
         pygame.display.flip()
-
         window.blit(backGround, (0,50))
-
         window.blit(knight, (150, 120))
         window.blit(First, (450, 200))
  
-        pygame.display.update()  
+
 
 
 def level2(window):
@@ -178,7 +179,7 @@ def level2(window):
     FONT = pygame.font.Font(None, 32)
 
     backGround = pygame.image.load("background.png")
-    input_box = InputBox(100, 500, 600, 34 , FONT)
+    input_box = InputBox()
     window.fill(COLOR_SKY)
     
     while x2 == 1:
@@ -201,41 +202,43 @@ def level2(window):
         window.blit(knight, (150, 120))
         window.blit(Second, (450, 200))
  
-        pygame.display.update()
+  
 
 def final(window):
     x2 = 1
     FONT = pygame.font.Font(None, 32)
 
     backGround = pygame.image.load("background.png")
-    input_box = InputBox(100, 500, 600, 34 , FONT)
+    input_box = InputBox()
     window.fill(COLOR_SKY)
     
     while x2 == 1:
         for event in pygame.event.get():
             if event.type == KEYDOWN:
+
+                input_box.update()
+                #window.fill((30, 30, 30))
+                input_box.draw(window)
+
+                pygame.display.flip()
+
+                window.blit(backGround, (0,50))
+
+                window.blit(knight, (150, 120))
+                window.blit(Final, (450, 50))
+         
+                
                 if event.key == K_ESCAPE:
                     x2 = 0
 
-            input_box.handle_event(event)
+                input_box.handle_event(event)
 
      
-        input_box.update()
-        #window.fill((30, 30, 30))
-        input_box.draw(window)
-
-        pygame.display.flip()
-
-        window.blit(backGround, (0,50))
-
-        window.blit(knight, (150, 120))
-        window.blit(Final, (450, 50))
- 
-        pygame.display.update()
+       
 
 
 
-
+clock = pygame.time.Clock()
 
 
 window = pygame.display.set_mode((ww, wh), FULLSCREEN)
