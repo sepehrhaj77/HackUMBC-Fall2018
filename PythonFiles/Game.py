@@ -12,7 +12,7 @@ COLOR_WHITE = (255, 255, 255)
 FONT = pygame.font.Font(None, 32)
 
 class InputBox:
-
+    
     def __init__(self,FONT= pygame.font.Font(None, 32),  text='',x=100, y=550, w=600, h=34):
         self.rect = pygame.Rect(x, y, w, h)
         self.color = (0,0,0)
